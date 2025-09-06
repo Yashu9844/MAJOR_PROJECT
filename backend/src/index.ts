@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import authRoutes from './routes/authenticated';
 import scanRoutes from './routes/scan';
 import clerkWebhook from './routes/clerkWebhook';
+import router from './routes/router'
 dotenv.config();
 
 const app: Application = express();
@@ -16,7 +17,7 @@ app.use(express.json());
 app.use('/api', authRoutes);
 app.use('/api/scans', scanRoutes);
 app.use('/api/webhooks', clerkWebhook);
-
+app.use("/api", router);
 
 
 // Routes
