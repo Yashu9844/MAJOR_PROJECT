@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from './routes/authenticated';
 import scanRoutes from './routes/scan';
+import clerkWebhook from './routes/clerkWebhook';
 dotenv.config();
 
 const app: Application = express();
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/api', authRoutes);
 app.use('/api/scans', scanRoutes);
+app.use('/api/webhooks', clerkWebhook);
 
 
 
