@@ -34,13 +34,20 @@ export const scanFile = async (req: AuthenticatedRequest, res: Response): Promis
       ),
     };
 
-    // Save log
-    const log: ILog = await Log.create({
+    // Prepare log data
+    const logData = {
       userId: userDoc._id,
       type: "SCAN",
       input: { filename: file.originalname, size: file.size },
       result: detectionResult,
-    });
+    };
+    
+    console.log("[DB] Attempting to save log:", logData);
+    
+    // Save log
+    const log: ILog = await Log.create(logData);
+    
+    console.log("[DB] Log saved successfully:", log._id);
 
     res.json({ success: true, detectionResult, log });
   } catch (err) {
